@@ -1,5 +1,9 @@
 *.class
 
+/target
+*.swp
+tmp
+
 # Package Files #
 *.jar
 *.war
