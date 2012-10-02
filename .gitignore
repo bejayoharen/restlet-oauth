@@ -1,8 +1,14 @@
 *.class
 
+# build and temporary files
 /target
 *.swp
 tmp
+
+# eclipse project files
+.classpath
+.project
+.settings
 
 # Package Files #
 *.jar
