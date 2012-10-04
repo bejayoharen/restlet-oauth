@@ -43,7 +43,8 @@ echo $REDIRECT_LOCATION
 
 # ---- log on:
 #FIXME: should be using digest auth
-curl -i --basic --user ${user}:${pass} "http://localhost:8080/oauth/authorize?client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=http://localhost:8080/protected/data&scope=AnOAuthScope&response_type=token" > tmp
+#curl -i --basic --user ${user}:${pass} "http://localhost:8080/oauth/authorize?client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=http://localhost:8080/protected/data&scope=AnOAuthScope&response_type=token" > tmp
+curl -i --basic --user ${user}:${pass} "http://localhost:8080/oauth/authorize?client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=http:%2F%2Flocalhost%3A8080%2Fprotected%2Fdata&scope=AnOAuthScope&response_type=token" > tmp
 cat tmp
 PARSE
 # verify that we got a 307:
@@ -56,7 +57,10 @@ echo $token
 
 # --------- access the protected resource:
 #curl --basic --user ${user}:${pass} -i -L "http://localhost:8080/protected/data?access_token=$token" > tmp
-curl -i "http://localhost:8080/protected/data?access_token=$token" > tmp
+#this is how we pass the access token in the new revision
+#curl -i "http://localhost:8080/protected/data?access_token=$token" > tmp
+#but we are still using revision 10 for this
+curl -i "http://localhost:8080/protected/data?oauth_token=$token" > tmp
 cat tmp
 PARSE
 echo $RESPONSE_CODE

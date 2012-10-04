@@ -1,14 +1,9 @@
 package auth;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-
 import org.restlet.Context;
 import org.restlet.Restlet;
 import org.restlet.ext.oauth.OAuthAuthorizer;
-import org.restlet.ext.oauth.OAuthParameters;
-import org.restlet.ext.oauth.OAuthProxy;
-import org.restlet.ext.oauth.internal.Scopes;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -21,23 +16,12 @@ public class ProtectedApplication extends org.restlet.Application {
         Context ctx = getContext();
         Router router = new Router(ctx);
 
-        /*
-        OAuthParameters params = new OAuthParameters("CLIENT_ID", "CLIENT_SECRET", "http://localhost:8080/oauth/", Scopes.toRoles("AnOAuthScope"));
-        params.setAuthorizePath("oauth/authorize");
-        params.setAccessTokenPath("oauth/token");
-        OAuthProxy local = new OAuthProxy(params, getContext().createChildContext()); // Have to create child context not to mix tokens
-        local.setNext(ProtectedResource.class);
-        router.attach("/data", local);
-        */
-        /*
-         */
         OAuthAuthorizer auth = new OAuthAuthorizer( "http://localhost:8080/oauth/validate" );
-        ArrayList <Role> roles = new ArrayList <Role>();
-        roles.add(new Role("AnOAuthScope", null));
-        auth.setAuthorizedRoles(roles);
+        //ArrayList <Role> roles = new ArrayList <Role>();
+        //roles.add(new Role("AnOAuthScope", null));
+        //auth.setAuthorizedRoles(roles);
         auth.setNext(ProtectedResource.class);
         router.attach("/data", auth);
-
 
         return router;
     }

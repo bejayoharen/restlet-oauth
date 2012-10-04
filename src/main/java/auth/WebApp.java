@@ -1,12 +1,7 @@
 package auth;
 
-import java.util.logging.Level;
-
 import org.restlet.Component;
-import org.restlet.Context;
-import org.restlet.Server;
 import org.restlet.data.Protocol;
-import org.restlet.engine.Engine;
 
 public class WebApp {
 	static int PORT;

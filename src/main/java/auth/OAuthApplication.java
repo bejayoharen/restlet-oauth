@@ -1,13 +1,9 @@
 package auth;
 
-import java.util.UUID;
-
 import org.restlet.Restlet;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.routing.Router;
 import org.restlet.security.ChallengeAuthenticator;
-import org.restlet.ext.crypto.DigestAuthenticator;
-import org.restlet.ext.crypto.DigestVerifier;
 import org.restlet.ext.oauth.AccessTokenServerResource;
 import org.restlet.ext.oauth.AuthPageServerResource;
 import org.restlet.ext.oauth.ClientStore;
