@@ -22,21 +22,22 @@ public class ProtectedApplication extends org.restlet.Application {
         Router router = new Router(ctx);
 
         /*
-        */
-        OAuthParameters params = new OAuthParameters("CLIENT_ID", "CLIENT_SECRET", "http://localhost:8080/oauth", Scopes.toRoles("AnOAuthScope"));
+        OAuthParameters params = new OAuthParameters("CLIENT_ID", "CLIENT_SECRET", "http://localhost:8080/oauth/", Scopes.toRoles("AnOAuthScope"));
         params.setAuthorizePath("oauth/authorize");
         params.setAccessTokenPath("oauth/token");
         OAuthProxy local = new OAuthProxy(params, getContext().createChildContext()); // Have to create child context not to mix tokens
         local.setNext(ProtectedResource.class);
         router.attach("/data", local);
+        */
         /*
+         */
         OAuthAuthorizer auth = new OAuthAuthorizer( "http://localhost:8080/oauth/validate" );
         ArrayList <Role> roles = new ArrayList <Role>();
         roles.add(new Role("AnOAuthScope", null));
         auth.setAuthorizedRoles(roles);
         auth.setNext(ProtectedResource.class);
         router.attach("/data", auth);
-         */
+
 
         return router;
     }
